@@ -25,9 +25,40 @@ Vue.component('add_task', {
     </section>
     `,
 
-
 })
 
+Vue.component('column_1', {
+    template: `
+        <section id="main" class="main-alt">
+            <div class="column column_one">
+            <p>Задачи</p>
+            
+            </div>
+        </section>
+    `,
+})
+
+Vue.component('column_2', {
+    template: `
+        <section id="main" class="main-alt">
+            <div class="column column_two">
+                <p>В процессе</p>
+                
+            </div>
+        </section>
+    `,
+})
+
+Vue.component('column_3', {
+    template: `
+        <section id="main" class="main-alt">
+            <div class="column column_three">
+            <p>Завершенные</p>
+
+            </div>
+        </section>
+    `,
+})
 
 let app = new Vue({
     el: '#app',

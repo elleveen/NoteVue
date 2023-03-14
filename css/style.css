@@ -63,3 +63,35 @@ input::placeholder {
     background-color: #42395c;
     cursor: pointer;
 }
+
+.column {
+    margin-left: 30px;
+    float: left;
+    width: 400px;
+    padding: 10px;
+    min-height: 500px;
+    font-size: 20pt;
+    background-color: #b4acc3;
+
+}
+
+.column>p {
+    margin-top: -10px;
+    margin-left: -10px;
+    width: 420px;
+    color: #42395c;
+    padding-top: 15px;
+    height: 40px;
+    text-align: center;
+    background-color: #9f96b1;
+    font-size: 20px;
+}
+
+.list{
+    justify-content: space-around;
+    margin: auto;
+    padding-top: 100px;
+    width: 80%;
+    display: flex;
+
+}
