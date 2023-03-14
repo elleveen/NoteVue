@@ -36,6 +36,16 @@ Vue.component('column', {
                 this.errors.push()
             }
         })
+        eventBus.$on('addColumn_2', ColumnCard => {
+            if (this.column_2.length < 5) {
+                this.errors.length = 0
+                this.column_2.push(ColumnCard)
+                this.column_1.splice(this.column_1.indexOf(ColumnCard), 1)
+            } else {
+                this.errors.length = 0
+                this.errors.push()
+            }
+        })
     }
 })
 
@@ -121,7 +131,7 @@ Vue.component('column_1', {
     },
     template: `
         <section id="main" class="main-alt">
-            <div class="column column_one">
+            <div class="column">
             <p>Задачи</p>
             <div class="card" v-for="card in column_1">
                 <h3>{{ card.name }}</h3>
@@ -140,26 +150,63 @@ Vue.component('column_1', {
     `,
 
     methods: {
+        TaskCompleted(ColumnCard, task) {
+            if (task.completed === false){
+                task.completed = true
+                ColumnCard.status += 1
+            }
+            let count = 0
+            for (let i = 0; i < 5; ++i) {
+                if (ColumnCard.points[i].name !== null) {
+                    count++;
+                }
+            }
+            if ((ColumnCard.status / count) * 100 >= 50) {
+                eventBus.$emit('addColumn_2', ColumnCard)
+                this.column_1.splice(this.column_1.indexOf(ColumnCard), 0)
+            }
+        },
 
     },
 })
 
 
 Vue.component('column_2', {
+    props: {
+        column_2: {
+            type: Array,
+        },
+        card: {
+            type: Object,
+        },
+    },
     template: `
         <section id="main" class="main-alt">
-            <div class="column column_two">
+            <div class="column">
                 <p>В процессе</p>
-                
+                <div class="card" v-for="card in column_2">
+                <h3>{{ card.name }}</h3>
+                    <ul class="tasks" v-for="task in card.points"
+                        v-if="task.name != null"
+                        @click="TaskCompleted(card, task)"
+                        :class="{completed: task.completed}">
+                        <li >
+                        {{ task.name }}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
     `,
+    methods: {
+
+    }
 })
 
 Vue.component('column_3', {
     template: `
         <section id="main" class="main-alt">
-            <div class="column column_three">
+            <div class="column">
             <p>Завершенные</p>
 
             </div>
