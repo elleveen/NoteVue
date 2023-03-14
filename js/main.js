@@ -244,8 +244,7 @@ Vue.component('column_3', {
                         {{ task.name }}
                         </li>
                     </ul><br>
-                    
-                        <p class="date">{{ card.date }}</p>
+                    <p class="date">{{ card.date }}</p>
                 </div>
             </div>
         </section>
