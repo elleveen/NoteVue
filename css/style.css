@@ -47,7 +47,7 @@ input::placeholder {
     margin-bottom: 20px;
 }
 
-.btn {
+button {
     border: 0;
     background-color: #b4acc3;
     margin-top: 20px;
@@ -59,7 +59,7 @@ input::placeholder {
 
 }
 
-.btn:hover {
+button:hover {
     background-color: #42395c;
     cursor: pointer;
 }

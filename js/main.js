@@ -1,3 +1,28 @@
+Vue.component('column', {
+
+    template: `
+ 
+        <div class="columns">
+            <add_task></add_task>
+            <div class="list">
+                <column_1 :column_1="column_1"></column_1>
+                <column_2 :column_2="column_2"></column_2>
+                <column_3 :column_3="column_3"></column_3>
+            </div>
+        </div>
+    `,
+
+
+    data() {
+        return {
+            column_1: [],
+            column_2: [],
+            column_3: [],
+        }
+
+    },
+})
+
 Vue.component('add_task', {
     template: `
     <section id="main" class="main-alt">
@@ -19,11 +44,22 @@ Vue.component('add_task', {
              <input type="text" v-model="point_5"  placeholder="Пятый пункт"/>
         </div>
             <div class="form_control">
-                <button class="btn">Отправить</button>
+                <button>Отправить</button>
             </div>
         </form>
     </section>
     `,
+    data() {
+        return {
+            name: null,
+            point_1: null,
+            point_2: null,
+            point_3: null,
+            point_4: null,
+            point_5: null,
+            date: null,
+        }
+    },
 
 })
 
