@@ -95,3 +95,29 @@ button:hover {
     display: flex;
 
 }
+
+.completed{
+    text-decoration: line-through;
+    color: #42395c;
+
+}
+
+
+h3{
+    padding-top: 20px;
+    color: #42395c;
+    font-size: 20pt;
+    text-align: center;
+}
+
+li{
+    color: white;
+    margin-left: 25px;
+
+}
+
+li:hover {
+    color: #42395c;
+    cursor: pointer;
+
+}
