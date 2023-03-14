@@ -46,6 +46,11 @@ Vue.component('column', {
                 this.errors.push()
             }
         })
+        eventBus.$on('addColumn_3', ColumnCard => {
+            this.column_3.push(ColumnCard)
+            this.column_2.splice(this.column_2.indexOf(ColumnCard), 1)
+
+        })
     }
 })
 
@@ -199,16 +204,49 @@ Vue.component('column_2', {
         </section>
     `,
     methods: {
+        TaskCompleted(ColumnCard, task) {
+            task.completed = true
+            ColumnCard.status += 1
+            let count = 0
+            for(let i = 0; i < 5; i++){
+                count++
+            }
+            if (( ColumnCard.status / count) * 100 >= 100 ) {
+                eventBus.$emit('addColumn_3', ColumnCard)
+                ColumnCard.date = new Date().toLocaleString()
 
+
+            }
+        }
     }
 })
 
 Vue.component('column_3', {
+    props: {
+        column_3: {
+            type: Array,
+        },
+        card: {
+            type: Object,
+        },
+    },
     template: `
         <section id="main" class="main-alt">
-            <div class="column">
-            <p>Завершенные</p>
-
+            <div class="column column_three">
+                <p>Завершенные задачи</p>
+                <div class="card" v-for="card in column_3">
+                <h3>{{ card.name }}</h3>
+                    <ul class="tasks" v-for="task in card.points"
+                        v-if="task.name != null"
+                        @click="TaskCompleted(card, task)"
+                        :class="{completed: task.completed}">
+                        <li>
+                        {{ task.name }}
+                        </li>
+                    </ul><br>
+                    
+                        <p class="date">{{ card.date }}</p>
+                </div>
             </div>
         </section>
     `,

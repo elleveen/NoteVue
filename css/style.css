@@ -11,7 +11,7 @@ body {
 }
 
 h1{
-    margin-left: 42% ;
+    margin: auto;
     margin-top: 20px;
     width: 320px;
     background-color: #b4acc3;
@@ -31,8 +31,7 @@ input {
     height: 30px;
     width: 300px;
     padding:10px;
-    margin-left:15px;
-    margin-top:5px;
+    margin: auto;
     border: none;
     background-color: #9f96b1;
     color: white;
@@ -51,14 +50,13 @@ input::placeholder {
 button {
     border: 0;
     background-color: #b4acc3;
-    margin-top: 20px;
-    margin-left: 15px;
+    margin: auto;
     padding: 10px;
     width: 320px;
     height: 48px;
     color: white;
 
-}
+}ц
 
 button:hover {
     background-color: #42395c;
@@ -108,6 +106,7 @@ h3{
     padding-top: 20px;
     color: #42395c;
     font-size: 20pt;
+    font-family: "Calibri Light";
     text-align: center;
 }
 
@@ -121,4 +120,9 @@ li:hover {
     color: #42395c;
     cursor: pointer;
 
+}
+
+.date{
+    color: #e6ddea;
+    text-align: center;
 }
