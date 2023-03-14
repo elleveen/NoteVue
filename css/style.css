@@ -8,3 +8,58 @@ body {
     margin: 0px;
 
 }
+
+h1{
+    margin-left: 42% ;
+    margin-top: 20px;
+    width: 320px;
+    background-color: #b4acc3;
+    text-align: center;
+    color: #42395c;
+
+}
+
+.form_control {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    height: 30px;
+    width: 300px;
+    padding:10px;
+    margin-left:15px;
+    margin-top:5px;
+    border: none;
+    background-color: #9f96b1;
+    color: white;
+    outline:none;
+
+}
+
+input::placeholder {
+    color: #e6ddea;
+}
+
+.form_name {
+    margin-bottom: 20px;
+}
+
+.btn {
+    border: 0;
+    background-color: #b4acc3;
+    margin-top: 20px;
+    margin-left: 15px;
+    padding: 10px;
+    width: 320px;
+    height: 48px;
+    color: white;
+
+}
+
+.btn:hover {
+    background-color: #42395c;
+    cursor: pointer;
+}
