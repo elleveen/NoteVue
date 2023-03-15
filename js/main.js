@@ -6,7 +6,6 @@ Vue.component('column', {
  
         <div class="columns">
             <add_task></add_task>
-            <p class="error" v-for="error in errors">{{ error }}</p>
             <div class="list">
                 <column_1 :column_1="column_1"></column_1>
                 <column_2 :column_2="column_2"></column_2>
@@ -21,7 +20,6 @@ Vue.component('column', {
             column_1: [],
             column_2: [],
             column_3: [],
-            errors: [],
         }
 
     },
@@ -47,26 +45,20 @@ Vue.component('column', {
         eventBus.$on('addColumn_1', ColumnCard => {
 
             if (this.column_1.length < 3) {
-                this.errors.length = 0
                 this.column_1.push(ColumnCard)
                 this.localSaveFirstColumn()
             } else {
-                this.errors.length = 0
-                this.errors.push()
                 alert('Максимальное колчиство карточек - три')
 
             }
         })
         eventBus.$on('addColumn_2', ColumnCard => {
             if (this.column_2.length < 5) {
-                this.errors.length = 0
                 this.column_2.push(ColumnCard)
                 this.column_1.splice(this.column_1.indexOf(ColumnCard), 1)
                 this.localSaveSecondColumn();
             } else {
                 alert('Максимальное колчиство карточек - пять')
-                this.errors.length = 0
-                this.errors.push()
 
             }
 
@@ -147,7 +139,6 @@ Vue.component('add_task', {
                 ],
                 date: null,
                 status: 0,
-                errors: [],
             }
             eventBus.$emit('addColumn_1', card)
             this.name = null;
@@ -171,9 +162,6 @@ Vue.component('column_1', {
         },
         card: {
             type: Object,
-        },
-        errors: {
-            type: Array,
         },
     },
     template: `
