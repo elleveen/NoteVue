@@ -240,6 +240,7 @@ Vue.component('column_2', {
                         <li >
                         {{ task.name }}
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -247,11 +248,15 @@ Vue.component('column_2', {
     `,
     methods: {
         TaskCompleted(ColumnCard, task) {
-            task.completed = true
-            ColumnCard.status += 1
+            if(task.completed === false){
+                task.completed = true
+                ColumnCard.status += 1
+            }
             let count = 0
             for(let i = 0; i < 5; i++){
-                count++
+                if (ColumnCard.points[i].name !== null) {
+                    count++
+                }
             }
             if (( ColumnCard.status / count) * 100 >= 100 ) {
                 eventBus.$emit('addColumn_3', ColumnCard)
