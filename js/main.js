@@ -99,7 +99,7 @@ Vue.component('column', {
 
 Vue.component('add_task', {
     template: `
-    <section id="main" class="main-alt">
+    <section id="main" class="main">
     
         <form class="row" @submit.prevent="Submit">
         <div class="form_control">
