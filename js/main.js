@@ -25,15 +25,36 @@ Vue.component('column', {
         }
 
     },
+
+    methods:{
+        localSaveFirstColumn(){
+            localStorage.setItem('column_1', JSON.stringify(this.column_1));
+        },
+        localSaveSecondColumn(){
+            localStorage.setItem('column_2', JSON.stringify(this.column_2));
+        },
+        localSaveThirdColumn(){
+            localStorage.setItem('column_3', JSON.stringify(this.column_3));
+        },
+    },
+
     mounted() {
+
+        this.column_1= JSON.parse(localStorage.getItem("column_1")) || [];
+        this.column_2 = JSON.parse(localStorage.getItem("column_2")) || [];
+        this.column_3 = JSON.parse(localStorage.getItem("column_3")) || [];
+
         eventBus.$on('addColumn_1', ColumnCard => {
 
             if (this.column_1.length < 3) {
                 this.errors.length = 0
                 this.column_1.push(ColumnCard)
+                this.localSaveFirstColumn()
             } else {
                 this.errors.length = 0
                 this.errors.push()
+                alert('Максимальное колчиство карточек - три')
+
             }
         })
         eventBus.$on('addColumn_2', ColumnCard => {
@@ -41,17 +62,39 @@ Vue.component('column', {
                 this.errors.length = 0
                 this.column_2.push(ColumnCard)
                 this.column_1.splice(this.column_1.indexOf(ColumnCard), 1)
+                this.localSaveSecondColumn();
             } else {
+                alert('Максимальное колчиство карточек - пять')
                 this.errors.length = 0
                 this.errors.push()
+
             }
+
+
         })
         eventBus.$on('addColumn_3', ColumnCard => {
             this.column_3.push(ColumnCard)
             this.column_2.splice(this.column_2.indexOf(ColumnCard), 1)
+            this.localSaveThirdColumn();
 
         })
-    }
+
+
+
+    },
+
+    watch: {
+        column_1(newValue) {
+            localStorage.setItem("column_1", JSON.stringify(newValue));
+        },
+        column_2(newValue) {
+            localStorage.setItem("column_2", JSON.stringify(newValue));
+        },
+        column_3(newValue) {
+            localStorage.setItem("column_3", JSON.stringify(newValue));
+        }
+    },
+
 })
 
 Vue.component('add_task', {
@@ -92,7 +135,6 @@ Vue.component('add_task', {
         }
     },
     methods: {
-
         Submit() {
             let card = {
                 name: this.name,
