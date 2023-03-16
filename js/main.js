@@ -7,7 +7,8 @@ Vue.component('column', {
         <div class="columns">
             <add_task></add_task>
             <div class="list">
-                <column_1 :column_1="column_1"></column_1>
+                <column_1 :column_1="column_1" v-if="column_2.length !== 5"></column_1>
+                <column_1 :column_1="column_1" v-if="column_2.length === 5" class="disabled"></column_1>
                 <column_2 :column_2="column_2"></column_2>
                 <column_3 :column_3="column_3"></column_3>
             </div>
@@ -55,7 +56,7 @@ Vue.component('column', {
         eventBus.$on('addColumn_2', ColumnCard => {
             if (this.column_2.length < 5) {
                 this.column_2.push(ColumnCard)
-                this.column_1.splice(this.column_1.indexOf(ColumnCard), 0)
+                this.column_1.splice(this.column_1.indexOf(ColumnCard), 1)
                 this.localSaveSecondColumn();
             } else if (this.column_2.length === 5){
                 alert("Максимальное количество карточек - 5")
@@ -167,19 +168,20 @@ Vue.component('column_1', {
     template: `
         <section id="main" class="main-alt">
             <div class="column">
-            <p>Задачи</p>
-            <div class="card" v-for="card in column_1">
-                <h3>{{ card.name }}</h3>
-                    <ul class="tasks" v-for="task in card.points"
-                        v-if="task.name != null"
-                        @click="TaskCompleted(card, task)"
-                        :class="{completed: task.completed}">
-                        <li>
-                        {{ task.name }}
-                        </li>
-                    </ul>
-                    
-            </div> 
+                <p>Задачи</p>
+                
+                <div class="card" v-for="card in column_1">
+                    <h3>{{ card.name }}</h3>
+                        <ul class="tasks" v-for="task in card.points"
+                            v-if="task.name != null"
+                            @click="TaskCompleted(card, task)"
+                            :class="{completed: task.completed}">
+                            <li>
+                            {{ task.name }}
+                            </li>
+                        </ul>
+                        
+                </div> 
             </div>
         </section>
     `,
@@ -198,7 +200,7 @@ Vue.component('column_1', {
             }
             if ((ColumnCard.status / count) * 100 >= 50) {
                 eventBus.$emit('addColumn_2', ColumnCard)
-                this.column_1.splice(this.column_1.indexOf(ColumnCard), 1)
+                this.column_1.splice(this.column_1.indexOf(ColumnCard), 0)
             }
 
 
