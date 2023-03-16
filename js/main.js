@@ -43,22 +43,22 @@ Vue.component('column', {
         this.column_3 = JSON.parse(localStorage.getItem("column_3")) || [];
 
         eventBus.$on('addColumn_1', ColumnCard => {
-
             if (this.column_1.length < 3) {
                 this.column_1.push(ColumnCard)
                 this.localSaveFirstColumn()
-            } else {
-                alert('Максимальное колчиство карточек - три')
-
+            }else{
+                alert("Максимальное количество карточек - 3")
             }
+
         })
+
         eventBus.$on('addColumn_2', ColumnCard => {
             if (this.column_2.length < 5) {
                 this.column_2.push(ColumnCard)
-                this.column_1.splice(this.column_1.indexOf(ColumnCard), 1)
+                this.column_1.splice(this.column_1.indexOf(ColumnCard), 0)
                 this.localSaveSecondColumn();
-            } else {
-                alert('Максимальное колчиство карточек - пять')
+            } else if (this.column_2.length === 5){
+                alert("Максимальное количество карточек - 5")
 
             }
 
@@ -198,8 +198,10 @@ Vue.component('column_1', {
             }
             if ((ColumnCard.status / count) * 100 >= 50) {
                 eventBus.$emit('addColumn_2', ColumnCard)
-                this.column_1.splice(this.column_1.indexOf(ColumnCard), 0)
+                this.column_1.splice(this.column_1.indexOf(ColumnCard), 1)
             }
+
+
         },
 
     },

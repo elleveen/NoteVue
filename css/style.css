@@ -15,7 +15,12 @@ body {
     width: 320px;
 }
 
-
+.columns>p{
+    color: red;
+    margin-left: 770px;
+    font-size: 20px;
+    margin-top: 80px;
+}
 
 h1{
     margin: auto;
